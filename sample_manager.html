@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src = "/socket.io/socket.io.js" > </script>
+    <script type=text/javascript src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script>
+    // this script section contains node.js code to interact with the main node.js script
+    // set pin identifier to photo_pin
+    var pin = 'photo_pin';
+
+// connect to websockets.  this sends the 'connect' message, which triggers the
+// onConnect callback in the node.js file
+var socket = io.connect();
+
+// this tells the webpage to be listening for a message called pinUpdate and to call
+// handlePinUpdate when it is received.  The pinUpdate message is sent from the node.js
+// file once an ADC value is received
+socket.on("pinUpdate", handlePinUpdate);
+
+$("#status").html(" " + "brown");
+console.log("Setting default value");
+
+
+function handlePinUpdate(message)
+{
+	let data = JSON.parse(message);
+
+	if(data.pin == 1)
+	{
+		console.log("status");
+		$("#status").html(" " + data.status);
+	}
+	if(data.pin == 2)
+	{
+		console.log("Room Width Reflected");
+		$("#roomWidthReflected").html(" " + data.roomWidthReflected);
+	}
+	if(data.pin == 3)
+	{
+		console.log("Room Length Reflected");
+		$("#roomLengthReflected").html(" " + data.roomLengthReflected);
+	}
+	if(data.pin == 4)
+	{
+		console.log("Ceiling Height Reflected");
+                $("#ceilingHeightReflected").html(" " + data.ceilingHeightReflected);
+	}
+	if(data.pin == 5)
+	{
+		console.log("Time to Amber");
+		$("#timeToAmber").html(" " + data.timeToAmber);
+	}
+	if(data.pin == 6)
+	{
+		console.log("Time to Green");
+		$("#timeToGreen").html(" " + data.timeToGreen);
+	}
+}
+
+// emit (send) a signal to the node.js file to indicate the desire to monitor
+// the pin specified by the pin variable (declared above)
+socket.emit('monitor', pin);
+
+// the switchUnits function is called when the SwitchUnits button is clicked
+function loadParameters()
+{
+	console.log("loading parameters");
+	// set minValue and maxValue based on the values entered by the user on the web page
+	let roomWidthData = $("#roomWidthDataId").val();
+	let roomLengthData = $("#roomLengthDataId").val();
+	let ceilingHeightData = $("#ceilingHeightDataId").val();
+
+	// send these values to the node.js script in JSON format with a message name of loadValues
+	socket.emit('loadParameters',{roomWidth: roomWidthData, roomLength: roomLengthData, ceilingHeight: ceilingHeightData});
+}
+
+function restartAlgorithm()
+{
+	socket.emit('restartAlgorithm',{});
+}
+</script>
+
+
+<style>
+table, td, th {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  height: 50px;
+  font-size: 36pt;
+  vertical-align: middle;
+}
+
+th {
+  height: 50px;
+  font-size: 36pt;
+  vertical-align: middle;
+}
+
+input[type=text] {
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 30pt;
+  vertical-align: middle;
+  text-align: middle;
+  color: gray;
+}
+
+input[type=submit] {
+  box-sizing: border-box;
+  font-size: 30pt;
+  vertical-align: middle;
+  text-align: middle;
+  background-color: lightgreen;
+}
+
+.button {
+  color: white;
+  padding: 8px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.button1 {
+  background-color: white; 
+  color: #4CAF50;
+  border: 3px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: #008CBA;
+  border: 3px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA; /* Blue */
+  color: white;
+}
+
+
+h1 {
+  font-size: 30pt;
+  vertical-align: middle;
+  text-align: middle;
+}
+
+h2 {
+  font-size: 50pt;
+}
+body {
+	  background-color: #E6F9FF;
+}
+</style>
+</head>
+<body>
+<h2>Sample Manager</h2>
+<table>
+  <tr style=background-color:lightgray>
+    <th>Device</th>
+    <th>Width</th>
+    <th>Length</th>
+    <th>Height</th>
+    <th>Action</th>
+    <th>Status</th>
+  </tr>
+
+  <tr style=background-color:white>
+    <td rowspan="2" style=font-size:36pt>Device 1</td>
+    <td><h1 id="roomWidthReflected"></td-->
+    <td><h1 id="roomLengthReflected"></td-->
+    <td><h1 id="ceilingHeightReflected"></td-->
+    <!--td><input type="submit" value="Restart" onclick="restartAlgorithm()"></td-->
+    <td><button class="button button2" onclick="restartAlgorithm()">Restart</button>
+    <td rowspan="2"><h1 id="status"></td>
+  </tr>
+
+  <tr style=background-color:white>
+    <td><input type=text name="roomWidth" id="roomWidthDataId" value=12 maxlength="4" size="4"></td>
+    <!--td><h1 id="roomWidthReflected"></td-->
+    <td><input type=text name="roomLength" id="roomLengthDataId" value=15 maxlength="4" size="4"></td>
+    <!--td><h1 id="roomLengthReflected"></td-->
+    <td><input type=text name="ceilingHeight" id="ceilingHeightDataId" value=10 maxlength="4" size="4"></td>
+    <!--td><h1 id="ceilingHeightReflected"></td-->
+    <!--td><input type="submit" value="Update" onclick="loadParameters()"></td-->
+    <td><button class="button button2" onclick="loadParameters()">Update</button>
+  </tr>
+</table>
+</body>
+</html>
