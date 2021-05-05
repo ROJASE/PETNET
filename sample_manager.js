@@ -196,7 +196,7 @@ yargs.command('*', false, (yargs) => {
         alias: 't',
         description: 'STRING: Targeted topic',
         type: 'string',
-        default: 'test/topic'
+        default: 'test/system_status'
     })
         .option('count', {
         alias: 'n',
