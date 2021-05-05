@@ -302,6 +302,9 @@ function execute_session(connection, argv) {
                       status = message.status;
                       timeToAmber = message.time_to_amber;
 	              timeToGreen = message.time_to_green;
+                  stepsReflected = message.steps;
+                  latitudeReflected = message.latitude;
+                  longitudeReflected = message.longitude;
 	              console.log('Setting status to ' + message.status);
                       console.log('status = ' + status);
 
