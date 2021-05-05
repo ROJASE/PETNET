@@ -109,7 +109,7 @@ function onConnect(socket)
     
     // save the socket identifier in a variable
     soc = socket;
-    status = "N/A";
+    // status = "N/A";
     // soc.emit("pinUpdate", '{"pin":"' + pin1 + '", "status":"' + status + '"}');
     // soc.emit("pinUpdate", '{"pin":"' + pin2 + '", "roomWidthReflected":"' + roomWidthReflected + '"}');
     // soc.emit("pinUpdate", '{"pin":"' + pin3 + '", "roomLengthReflected":"' + roomLengthReflected + '"}');
@@ -133,9 +133,9 @@ function handleLoadParameters(data)
     // print the min and max to the console
     console.log('////////////////////////////////');
 
-    console.log('room width = ' + data.roomWidth);
-    console.log('room Length = ' + data.roomLength);
-    console.log('ceiling height = ' + data.ceilingHeight);
+    // console.log('room width = ' + data.roomWidth);
+    // console.log('room Length = ' + data.roomLength);
+    // console.log('ceiling height = ' + data.ceilingHeight);
 
     console.log('Number of Sets = ' + data.steps);
     console.log('Latitude Cordinate = ' + data.latitude);
@@ -144,9 +144,9 @@ function handleLoadParameters(data)
 
     console.log('////////////////////////////////');
    
-    roomWidth = data.roomWidth;
-    roomLength = data.roomLength;
-    ceilingHeight = data.ceilingHeight;
+    // roomWidth = data.roomWidth;
+    // roomLength = data.roomLength;
+    // ceilingHeight = data.ceilingHeight;
 
     steps = data.steps;
     latitude = data.latitude;
@@ -155,7 +155,7 @@ function handleLoadParameters(data)
     publish_request = 1;
     console.log("Requesting PUBLISH");
     // put the min and max into a string, separated by a space
-    var min_max_values = data.squareFeet + " " + data.ceilingHeight;
+    // var min_max_values = data.squareFeet + " " + data.ceilingHeight;
 }
 
 function handleRestartAlgorithm(data)
@@ -353,9 +353,9 @@ function execute_session(connection, argv) {
                 for (let op_idx = 0; op_idx < 9999; ++op_idx) {
                     const publish = () => __awaiter(this, void 0, void 0, function* () {
                         const msg = {
-                            room_width: roomWidth,
-                            room_length: roomLength,
-                            ceiling_height: ceilingHeight,
+                            // room_width: roomWidth,
+                            // room_length: roomLength,
+                            // ceiling_height: ceilingHeight,
 			    restart_algorithm: restartAlgorithm,
                             sequence: op_idx + 1,
                         };
