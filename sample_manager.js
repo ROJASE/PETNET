@@ -43,7 +43,7 @@ var restartAlgorithm = 0;
 // var roomWidthReflected = "NoneRW";
 // var roomLengthReflected = "NoneRL";
 // var ceilingHeightReflected = "NoneCH";
-// var publish_request = 0;
+var publish_request = 0;
 // var timeToGreen = 1800;
 // var timeToAmber = 300;
 
