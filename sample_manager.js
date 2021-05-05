@@ -35,17 +35,17 @@ var pin5 = 5;
 var pin6 = 6;
 
 // Potter Variables 
-var roomWidth = 999;
-var roomLength = 955;
-var ceilingHeight = 888;
-var restartAlgorithm = 0;
-var status = "NoneSt";
-var roomWidthReflected = "NoneRW";
-var roomLengthReflected = "NoneRL";
-var ceilingHeightReflected = "NoneCH";
-var publish_request = 0;
-var timeToGreen = 1800;
-var timeToAmber = 300;
+// var roomWidth = 999;
+// var roomLength = 955;
+// var ceilingHeight = 888;
+// var restartAlgorithm = 0;
+// var status = "NoneSt";
+// var roomWidthReflected = "NoneRW";
+// var roomLengthReflected = "NoneRL";
+// var ceilingHeightReflected = "NoneCH";
+// var publish_request = 0;
+// var timeToGreen = 1800;
+// var timeToAmber = 300;
 
 // My Variables 
 var pin7 = 7;
@@ -61,9 +61,12 @@ var pin12 = 12;
 var steps = 0;
 var latitude = 0;
 var longitude =0;
+
 var stepsReflected = "No Steps";
 var latitudeReflected = "No Latitude";
 var longitudeReflected = "No Longitude";
+
+
 var foodWeightReflect = "No Weight";
 var timeReflect = "No Time";
 var durationReflect = "No Duration"
@@ -107,18 +110,18 @@ function onConnect(socket)
     // save the socket identifier in a variable
     soc = socket;
     status = "N/A";
-    soc.emit("pinUpdate", '{"pin":"' + pin1 + '", "status":"' + status + '"}');
-    soc.emit("pinUpdate", '{"pin":"' + pin2 + '", "roomWidthReflected":"' + roomWidthReflected + '"}');
-    soc.emit("pinUpdate", '{"pin":"' + pin3 + '", "roomLengthReflected":"' + roomLengthReflected + '"}');
-    soc.emit("pinUpdate", '{"pin":"' + pin4 + '", "ceilingHeightReflected":"' + ceilingHeightReflected + '"}');
-    soc.emit("pinUpdate", '{"pin":"' + pin5 + '", "timeToAmber":"' + timeToAmber + '"}');
-    soc.emit("pinUpdate", '{"pin":"' + pin6 + '", "timeToGreen":"' + timeToGreen + '"}');
+    // soc.emit("pinUpdate", '{"pin":"' + pin1 + '", "status":"' + status + '"}');
+    // soc.emit("pinUpdate", '{"pin":"' + pin2 + '", "roomWidthReflected":"' + roomWidthReflected + '"}');
+    // soc.emit("pinUpdate", '{"pin":"' + pin3 + '", "roomLengthReflected":"' + roomLengthReflected + '"}');
+    // soc.emit("pinUpdate", '{"pin":"' + pin4 + '", "ceilingHeightReflected":"' + ceilingHeightReflected + '"}');
+    // soc.emit("pinUpdate", '{"pin":"' + pin5 + '", "timeToAmber":"' + timeToAmber + '"}');
+    // soc.emit("pinUpdate", '{"pin":"' + pin6 + '", "timeToGreen":"' + timeToGreen + '"}');
     soc.emit("pinUpdate", '{"pin":"' + pin7 + '", "stepsReflected":"' + stepsReflected + '"}');
     soc.emit("pinUpdate", '{"pin":"' + pin8 + '", "latitudeReflected":"' + latitudeReflected + '"}');
     soc.emit("pinUpdate", '{"pin":"' + pin9 + '", "longitudeReflected":"' + longitudeReflected + '"}');
-    soc.emit("pinUpdate", '{"pin":"' + pin10 + '", "foodWeightReflect":"' + foodWeightReflect + '"}');
-    soc.emit("pinUpdate", '{"pin":"' + pin11 + '", "timeReflect":"' + timeReflect + '"}');
-    soc.emit("pinUpdate", '{"pin":"' + pin12 + '", "durationReflect":"' + durationReflect + '"}');
+    // soc.emit("pinUpdate", '{"pin":"' + pin10 + '", "foodWeightReflect":"' + foodWeightReflect + '"}');
+    // soc.emit("pinUpdate", '{"pin":"' + pin11 + '", "timeReflect":"' + timeReflect + '"}');
+    // soc.emit("pinUpdate", '{"pin":"' + pin12 + '", "durationReflect":"' + durationReflect + '"}');
 }
 
 // this is the callback for the loadValues message
@@ -307,34 +310,34 @@ function execute_session(connection, argv) {
                  
                    if(monitorRequested)
                    {
-	              roomWidthReflected = message.room_width_reflected;
-	              roomLengthReflected = message.room_length_reflected;
-	              ceilingHeightReflected = message.ceiling_height_reflected;
-                      status = message.status;
-                      timeToAmber = message.time_to_amber;
-	              timeToGreen = message.time_to_green;
+	            //   roomWidthReflected = message.room_width_reflected;
+	            //   roomLengthReflected = message.room_length_reflected;
+	            //   ceilingHeightReflected = message.ceiling_height_reflected;
+                //       status = message.status;
+                //       timeToAmber = message.time_to_amber;
+	            //   timeToGreen = message.time_to_green;
                   stepsReflected = message.steps;
                   latitudeReflected = message.latitude;
                   longitudeReflected = message.longitude;
-                  foodWeightReflect = message.Food_Weight;
-                  timeReflect = message.Time;
-                  durationReflect = message.Duration;
+                //   foodWeightReflect = message.Food_Weight;
+                //   timeReflect = message.Time;
+                //   durationReflect = message.Duration;
                   
-	              console.log('Setting status to ' + message.status);
-                      console.log('status = ' + status);
+	            //   console.log('Setting status to ' + message.status);
+                //       console.log('status = ' + status);
 
-                      soc.emit("pinUpdate", '{"pin":"' + pin1 + '", "status":"' + status + '"}');
-                      soc.emit("pinUpdate", '{"pin":"' + pin2 + '", "roomWidthReflected":"' + roomWidthReflected + '"}');
-                      soc.emit("pinUpdate", '{"pin":"' + pin3 + '", "roomLengthReflected":"' + roomLengthReflected + '"}');
-                      soc.emit("pinUpdate", '{"pin":"' + pin4 + '", "ceilingHeightReflected":"' + ceilingHeightReflected + '"}');
-                      soc.emit("pinUpdate", '{"pin":"' + pin5 + '", "timeToAmber":"' + timeToAmber + '"}');
-                      soc.emit("pinUpdate", '{"pin":"' + pin6 + '", "timeToGreen":"' + timeToGreen + '"}');
+                //       soc.emit("pinUpdate", '{"pin":"' + pin1 + '", "status":"' + status + '"}');
+                //       soc.emit("pinUpdate", '{"pin":"' + pin2 + '", "roomWidthReflected":"' + roomWidthReflected + '"}');
+                //       soc.emit("pinUpdate", '{"pin":"' + pin3 + '", "roomLengthReflected":"' + roomLengthReflected + '"}');
+                //       soc.emit("pinUpdate", '{"pin":"' + pin4 + '", "ceilingHeightReflected":"' + ceilingHeightReflected + '"}');
+                //       soc.emit("pinUpdate", '{"pin":"' + pin5 + '", "timeToAmber":"' + timeToAmber + '"}');
+                //       soc.emit("pinUpdate", '{"pin":"' + pin6 + '", "timeToGreen":"' + timeToGreen + '"}');
                       soc.emit("pinUpdate", '{"pin":"' + pin7 + '", "stepsReflected":"' + stepsReflected + '"}');
                       soc.emit("pinUpdate", '{"pin":"' + pin8 + '", "latitudeReflected":"' + latitudeReflected + '"}');
                       soc.emit("pinUpdate", '{"pin":"' + pin9 + '", "longitudeReflected":"' + longitudeReflected + '"}');
-                      soc.emit("pinUpdate", '{"pin":"' + pin10 + '", "foodWeightReflect":"' + foodWeightReflect + '"}');
-                      soc.emit("pinUpdate", '{"pin":"' + pin11 + '", "timeReflect":"' + timeReflect + '"}');
-                      soc.emit("pinUpdate", '{"pin":"' + pin12 + '", "durationReflect":"' + durationReflect + '"}');
+                    //   soc.emit("pinUpdate", '{"pin":"' + pin10 + '", "foodWeightReflect":"' + foodWeightReflect + '"}');
+                    //   soc.emit("pinUpdate", '{"pin":"' + pin11 + '", "timeReflect":"' + timeReflect + '"}');
+                    //   soc.emit("pinUpdate", '{"pin":"' + pin12 + '", "durationReflect":"' + durationReflect + '"}');
                    }          
      
                    if (message.sequence == argv.count) {
@@ -343,6 +346,7 @@ function execute_session(connection, argv) {
                 });
 
                 yield connection.subscribe(argv.topic, aws_iot_device_sdk_v2_1.mqtt.QoS.AtLeastOnce, on_publish);
+
 		// TODO: this for loop just loops to a high value
 		// clearly, this is not a long-term solution, but 
 		// neither is this ugly webpage
