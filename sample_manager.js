@@ -34,7 +34,7 @@ var pin4 = 4;
 var pin5 = 5;
 var pin6 = 6;
 
-
+// Potter Variables 
 var roomWidth = 999;
 var roomLength = 955;
 var ceilingHeight = 888;
@@ -46,6 +46,20 @@ var ceilingHeightReflected = "NoneCH";
 var publish_request = 0;
 var timeToGreen = 1800;
 var timeToAmber = 300;
+
+// My Variables 
+var pin7 = 7;
+var pin8 = 8;
+var pin9 = 9;
+
+
+var steps = 0;
+var latitude = 0;
+var longitude =0;
+var stepsReflected = "No Steps";
+var latitudeReflected = "No Latitude";
+var longitudeReflected = "No Longitude";
+
 
 // print to console that the program is starting
 console.log("Starting Sample Manager server")
@@ -91,6 +105,9 @@ function onConnect(socket)
     soc.emit("pinUpdate", '{"pin":"' + pin4 + '", "ceilingHeightReflected":"' + ceilingHeightReflected + '"}');
     soc.emit("pinUpdate", '{"pin":"' + pin5 + '", "timeToAmber":"' + timeToAmber + '"}');
     soc.emit("pinUpdate", '{"pin":"' + pin6 + '", "timeToGreen":"' + timeToGreen + '"}');
+    soc.emit("pinUpdate", '{"pin":"' + pin7 + '", "stepsReflected":"' + stepsReflected + '"}');
+    soc.emit("pinUpdate", '{"pin":"' + pin8 + '", "latitudeReflected":"' + latitudeReflected + '"}');
+    soc.emit("pinUpdate", '{"pin":"' + pin9 + '", "longitudeReflected":"' + longitudeReflected + '"}');
 }
 
 // this is the callback for the loadValues message
@@ -101,14 +118,25 @@ function handleLoadParameters(data)
 {
     // print the min and max to the console
     console.log('////////////////////////////////');
+
     console.log('room width = ' + data.roomWidth);
     console.log('room Length = ' + data.roomLength);
     console.log('ceiling height = ' + data.ceilingHeight);
+
+    console.log('Number of Sets = ' + data.steps);
+    console.log('Latitude Cordinate = ' + data.latitude);
+    console.log('Longitude Cordinate = ' + data.longitude);
+
+
     console.log('////////////////////////////////');
    
     roomWidth = data.roomWidth;
     roomLength = data.roomLength;
     ceilingHeight = data.ceilingHeight;
+
+    steps = data.steps;
+    latitude = data.latitude;
+    longitude = data.longitude;
 
     publish_request = 1;
     console.log("Requesting PUBLISH");
@@ -283,6 +311,9 @@ function execute_session(connection, argv) {
                       soc.emit("pinUpdate", '{"pin":"' + pin4 + '", "ceilingHeightReflected":"' + ceilingHeightReflected + '"}');
                       soc.emit("pinUpdate", '{"pin":"' + pin5 + '", "timeToAmber":"' + timeToAmber + '"}');
                       soc.emit("pinUpdate", '{"pin":"' + pin6 + '", "timeToGreen":"' + timeToGreen + '"}');
+                      soc.emit("pinUpdate", '{"pin":"' + pin7 + '", "stepsReflected":"' + stepsReflected + '"}');
+                      soc.emit("pinUpdate", '{"pin":"' + pin8 + '", "latitudeReflected":"' + latitudeReflected + '"}');
+                      soc.emit("pinUpdate", '{"pin":"' + pin9 + '", "longitudeReflected":"' + longitudeReflected + '"}');
                    }          
      
                    if (message.sequence == argv.count) {
