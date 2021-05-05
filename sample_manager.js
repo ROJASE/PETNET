@@ -52,6 +52,11 @@ var pin7 = 7;
 var pin8 = 8;
 var pin9 = 9;
 
+var pin10 = 10;
+var pin11 = 11;
+var pin12 = 12;
+
+
 
 var steps = 0;
 var latitude = 0;
@@ -59,6 +64,9 @@ var longitude =0;
 var stepsReflected = "No Steps";
 var latitudeReflected = "No Latitude";
 var longitudeReflected = "No Longitude";
+var foodWeightReflect = "No Weight";
+var timeReflect = "No Time";
+var durationReflect = "No Duration"
 
 
 // print to console that the program is starting
@@ -108,6 +116,9 @@ function onConnect(socket)
     soc.emit("pinUpdate", '{"pin":"' + pin7 + '", "stepsReflected":"' + stepsReflected + '"}');
     soc.emit("pinUpdate", '{"pin":"' + pin8 + '", "latitudeReflected":"' + latitudeReflected + '"}');
     soc.emit("pinUpdate", '{"pin":"' + pin9 + '", "longitudeReflected":"' + longitudeReflected + '"}');
+    soc.emit("pinUpdate", '{"pin":"' + pin10 + '", "foodWeightReflect":"' + foodWeightReflect + '"}');
+    soc.emit("pinUpdate", '{"pin":"' + pin11 + '", "timeReflect":"' + timeReflect + '"}');
+    soc.emit("pinUpdate", '{"pin":"' + pin12 + '", "durationReflect":"' + durationReflect + '"}');
 }
 
 // this is the callback for the loadValues message
@@ -305,6 +316,10 @@ function execute_session(connection, argv) {
                   stepsReflected = message.steps;
                   latitudeReflected = message.latitude;
                   longitudeReflected = message.longitude;
+                  foodWeightReflect = message.Food_Weight;
+                  timeReflect = message.Time;
+                  durationReflect = message.Duration;
+                  
 	              console.log('Setting status to ' + message.status);
                       console.log('status = ' + status);
 
@@ -317,6 +332,9 @@ function execute_session(connection, argv) {
                       soc.emit("pinUpdate", '{"pin":"' + pin7 + '", "stepsReflected":"' + stepsReflected + '"}');
                       soc.emit("pinUpdate", '{"pin":"' + pin8 + '", "latitudeReflected":"' + latitudeReflected + '"}');
                       soc.emit("pinUpdate", '{"pin":"' + pin9 + '", "longitudeReflected":"' + longitudeReflected + '"}');
+                      soc.emit("pinUpdate", '{"pin":"' + pin10 + '", "foodWeightReflect":"' + foodWeightReflect + '"}');
+                      soc.emit("pinUpdate", '{"pin":"' + pin11 + '", "timeReflect":"' + timeReflect + '"}');
+                      soc.emit("pinUpdate", '{"pin":"' + pin12 + '", "durationReflect":"' + durationReflect + '"}');
                    }          
      
                    if (message.sequence == argv.count) {

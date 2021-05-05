@@ -70,6 +70,21 @@ function handlePinUpdate(message)
 		console.log("Longitude");
 		$("#longitudeReflected").html(" " + data.longitudeReflected);
 	}
+  if(data.pin == 10)
+	{
+		console.log("Food Weight");
+		$("#foodWeightReflect").html(" " + data.foodWeightReflect);
+	}
+  if(data.pin == 11)
+	{
+		console.log("Time");
+		$("#timeReflect").html(" " + data.timeReflect);
+	}
+  if(data.pin == 12)
+	{
+		console.log("Duration");
+		$("#durationReflect").html(" " + data.durationReflect);
+	}
 }
 
 // emit (send) a signal to the node.js file to indicate the desire to monitor
@@ -87,10 +102,13 @@ function loadParameters()
   let stepsData = $("#stepsDataId").val();
   let latitudeData = $("#latitudeDataId").val();
   let longitudeData = $("#longitudeDataId").val();
+  let foodWeightData = $("#foodWeightDataID").val();
+  let timeData = $("#timeDataID").val();
+  let durationData = $("#durationDataID").val();
 
 
 	// send these values to the node.js script in JSON format with a message name of loadValues
-	socket.emit('loadParameters',{roomWidth: roomWidthData, roomLength: roomLengthData, ceilingHeight: ceilingHeightData, steps: stepsData, latitude: latitudeData, longitude: longitudeData});
+	socket.emit('loadParameters',{roomWidth: roomWidthData, roomLength: roomLengthData, ceilingHeight: ceilingHeightData, steps: stepsData, latitude: latitudeData, longitude: longitudeData, foodWeight: foodWeightData, time: timeData, duration: durationData});
 }
 
 function restartAlgorithm()
@@ -235,6 +253,23 @@ body {
     <td><h1 id="stepsReflected"></td-->
     <td><h1 id="latitudeReflected"></td-->
     <td><h1 id="longitudeReflected"></td-->
+    <td rowspan="1"><h1 id="status"></td>
+  </tr>
+</table>
+<h2>Feeding</h2>
+<table>
+  <tr style=background-color:lightgray>
+    <th></th>
+    <th>Food Weight</th>
+    <th>Time</th>
+    <th>Duration</th>
+  </tr>
+
+  <tr style=background-color:white>
+    <td rowspan="2" style=font-size:36pt>Feeding RPI</td>
+    <td><h1 id="foodWeightReflect"></td-->
+    <td><h1 id="timeReflect"></td-->
+    <td><h1 id="durationReflect"></td-->
     <td rowspan="1"><h1 id="status"></td>
   </tr>
 </table>
