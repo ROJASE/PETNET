@@ -24,37 +24,6 @@ console.log("Setting default value");
 function handlePinUpdate(message)
 {
 	let data = JSON.parse(message);
-
-	// if(data.pin == 1)
-	// {
-	// 	console.log("status");
-	// 	$("#status").html(" " + data.status);
-	// }
-	// if(data.pin == 2)
-	// {
-	// 	console.log("Room Width Reflected");
-	// 	$("#roomWidthReflected").html(" " + data.roomWidthReflected);
-	// }
-	// if(data.pin == 3)
-	// {
-	// 	console.log("Room Length Reflected");
-	// 	$("#roomLengthReflected").html(" " + data.roomLengthReflected);
-	// }
-	// if(data.pin == 4)
-	// {
-	// 	console.log("Ceiling Height Reflected");
-  //               $("#ceilingHeightReflected").html(" " + data.ceilingHeightReflected);
-	// }
-	// if(data.pin == 5)
-	// {
-	// 	console.log("Time to Amber");
-	// 	$("#timeToAmber").html(" " + data.timeToAmber);
-	// }
-	// if(data.pin == 6)
-	// {
-	// 	console.log("Time to Green");
-	// 	$("#timeToGreen").html(" " + data.timeToGreen);
-	// }
   if(data.pin == 7)
 	{
 		console.log("Steps");
@@ -70,21 +39,6 @@ function handlePinUpdate(message)
 		console.log("Longitude");
 		$("#longitudeReflected").html(" " + data.longitudeReflected);
 	}
-  // if(data.pin == 10)
-	// {
-	// 	console.log("Food Weight");
-	// 	$("#foodWeightReflect").html(" " + data.foodWeightReflect);
-	// }
-  // if(data.pin == 11)
-	// {
-	// 	console.log("Time");
-	// 	$("#timeReflect").html(" " + data.timeReflect);
-	// }
-  // if(data.pin == 12)
-	// {
-	// 	console.log("Duration");
-	// 	$("#durationReflect").html(" " + data.durationReflect);
-	// }
 }
 
 // emit (send) a signal to the node.js file to indicate the desire to monitor

@@ -1,8 +1,5 @@
 "use strict";
-/**
- * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0.
- */
+
 // include the file system library to allow access to system files
 var fs = require('fs');
 
@@ -27,44 +24,15 @@ var htmlPage = 'feeding_manager.html';
 // declare variables
 var soc;
 var monitorRequested = false;
-var pin1 = 1;
-var pin2 = 2;
-var pin3 = 3;
-var pin4 = 4;
-var pin5 = 5;
-var pin6 = 6;
 
 // Potter Variables 
-// var roomWidth = 999;
-// var roomLength = 955;
-// var ceilingHeight = 888;
 var restartAlgorithm = 0;
-// var status = "NoneSt";
-// var roomWidthReflected = "NoneRW";
-// var roomLengthReflected = "NoneRL";
-// var ceilingHeightReflected = "NoneCH";
 var publish_request = 0;
-// var timeToGreen = 1800;
-// var timeToAmber = 300;
 
 // My Variables 
-var pin7 = 7;
-var pin8 = 8;
-var pin9 = 9;
-
 var pin10 = 10;
 var pin11 = 11;
 var pin12 = 12;
-
-
-
-var steps = 0;
-var latitude = 0;
-var longitude =0;
-
-// var stepsReflected = "No Steps";
-// var latitudeReflected = "No Latitude";
-// var longitudeReflected = "No Longitude";
 
 var foodWeight = 0;
 var time = 0;
@@ -112,16 +80,6 @@ function onConnect(socket)
     
     // save the socket identifier in a variable
     soc = socket;
-    // status = "N/A";
-    // soc.emit("pinUpdate", '{"pin":"' + pin1 + '", "status":"' + status + '"}');
-    // soc.emit("pinUpdate", '{"pin":"' + pin2 + '", "roomWidthReflected":"' + roomWidthReflected + '"}');
-    // soc.emit("pinUpdate", '{"pin":"' + pin3 + '", "roomLengthReflected":"' + roomLengthReflected + '"}');
-    // soc.emit("pinUpdate", '{"pin":"' + pin4 + '", "ceilingHeightReflected":"' + ceilingHeightReflected + '"}');
-    // soc.emit("pinUpdate", '{"pin":"' + pin5 + '", "timeToAmber":"' + timeToAmber + '"}');
-    // soc.emit("pinUpdate", '{"pin":"' + pin6 + '", "timeToGreen":"' + timeToGreen + '"}');
-    // soc.emit("pinUpdate", '{"pin":"' + pin7 + '", "stepsReflected":"' + stepsReflected + '"}');
-    // soc.emit("pinUpdate", '{"pin":"' + pin8 + '", "latitudeReflected":"' + latitudeReflected + '"}');
-    // soc.emit("pinUpdate", '{"pin":"' + pin9 + '", "longitudeReflected":"' + longitudeReflected + '"}');
     soc.emit("pinUpdate", '{"pin":"' + pin10 + '", "foodWeightReflect":"' + foodWeightReflect + '"}');
     soc.emit("pinUpdate", '{"pin":"' + pin11 + '", "timeReflect":"' + timeReflect + '"}');
     soc.emit("pinUpdate", '{"pin":"' + pin12 + '", "durationReflect":"' + durationReflect + '"}');
@@ -136,28 +94,11 @@ function handleLoadParameters(data)
     // print the min and max to the console
     console.log('////////////////////////////////');
 
-    // console.log('room width = ' + data.roomWidth);
-    // console.log('room Length = ' + data.roomLength);
-    // console.log('ceiling height = ' + data.ceilingHeight);
-
-    // console.log('Number of Sets = ' + data.steps);
-    // console.log('Latitude Cordinate = ' + data.latitude);
-    // console.log('Longitude Cordinate = ' + data.longitude);
-
     console.log('Food Weight = ' + data.Food_Weight);
     console.log('Time = ' + data.Time);
     console.log('Duration = ' + data.Duration);
 
-
     console.log('////////////////////////////////');
-   
-    // roomWidth = data.roomWidth;
-    // roomLength = data.roomLength;
-    // ceilingHeight = data.ceilingHeight;
-
-    // steps = data.steps;
-    // latitude = data.latitude;
-    // longitude = data.longitude;
 
     foodWeight = data.Food_Weight;
     time = data.Time;
@@ -319,71 +260,21 @@ function execute_session(connection, argv) {
                    console.log(json);
                    const message = JSON.parse(json);
                  
-                   if(monitorRequested)
-                   {
-	            //   roomWidthReflected = message.room_width_reflected;
-	            //   roomLengthReflected = message.room_length_reflected;
-	            //   ceilingHeightReflected = message.ceiling_height_reflected;
-                //       status = message.status;
-                //       timeToAmber = message.time_to_amber;
-	            //   timeToGreen = message.time_to_green;
-                //   stepsReflected = message.steps;
-                //   latitudeReflected = message.latitude;
-                //   longitudeReflected = message.longitude;
-                  foodWeightReflect = message.Food_Weight;
-                  timeReflect = message.Time;
-                  durationReflect = message.Duration;
-                  
-	            //   console.log('Setting status to ' + message.status);
-                //       console.log('status = ' + status);
+                    if(monitorRequested){
+                        foodWeightReflect = message.Food_Weight;
+                        timeReflect = message.Time;
+                        durationReflect = message.Duration;
+                        soc.emit("pinUpdate", '{"pin":"' + pin10 + '", "foodWeightReflect":"' + foodWeightReflect + '"}');
+                        soc.emit("pinUpdate", '{"pin":"' + pin11 + '", "timeReflect":"' + timeReflect + '"}');
+                        soc.emit("pinUpdate", '{"pin":"' + pin12 + '", "durationReflect":"' + durationReflect + '"}');
+                    }          
 
-                //       soc.emit("pinUpdate", '{"pin":"' + pin1 + '", "status":"' + status + '"}');
-                //       soc.emit("pinUpdate", '{"pin":"' + pin2 + '", "roomWidthReflected":"' + roomWidthReflected + '"}');
-                //       soc.emit("pinUpdate", '{"pin":"' + pin3 + '", "roomLengthReflected":"' + roomLengthReflected + '"}');
-                //       soc.emit("pinUpdate", '{"pin":"' + pin4 + '", "ceilingHeightReflected":"' + ceilingHeightReflected + '"}');
-                //       soc.emit("pinUpdate", '{"pin":"' + pin5 + '", "timeToAmber":"' + timeToAmber + '"}');
-                //       soc.emit("pinUpdate", '{"pin":"' + pin6 + '", "timeToGreen":"' + timeToGreen + '"}');
-                    //   soc.emit("pinUpdate", '{"pin":"' + pin7 + '", "stepsReflected":"' + stepsReflected + '"}');
-                    //   soc.emit("pinUpdate", '{"pin":"' + pin8 + '", "latitudeReflected":"' + latitudeReflected + '"}');
-                    //   soc.emit("pinUpdate", '{"pin":"' + pin9 + '", "longitudeReflected":"' + longitudeReflected + '"}');
-                      soc.emit("pinUpdate", '{"pin":"' + pin10 + '", "foodWeightReflect":"' + foodWeightReflect + '"}');
-                      soc.emit("pinUpdate", '{"pin":"' + pin11 + '", "timeReflect":"' + timeReflect + '"}');
-                      soc.emit("pinUpdate", '{"pin":"' + pin12 + '", "durationReflect":"' + durationReflect + '"}');
-                   }          
-     
                    if (message.sequence == argv.count) {
                         resolve();
                     }
                 });
 
                 yield connection.subscribe(argv.topic, aws_iot_device_sdk_v2_1.mqtt.QoS.AtLeastOnce, on_publish);
-
-		// TODO: this for loop just loops to a high value
-		// clearly, this is not a long-term solution, but 
-		// neither is this ugly webpage
-        //         for (let op_idx = 0; op_idx < 9999; ++op_idx) {
-        //             const publish = () => __awaiter(this, void 0, void 0, function* () {
-        //                 const msg = {
-        //                     room_width: roomWidth,
-        //                     room_length: roomLength,
-        //                     ceiling_height: ceilingHeight,
-		// 	    restart_algorithm: restartAlgorithm,
-        //                     sequence: op_idx + 1,
-        //                 };
-			    
-		// 	restartAlgorithm = 0;
-        //                 const json = JSON.stringify(msg);
-		// 	console.log("publish called");
-		//         if(publish_request == 1) 
-		// 	{
-		// 	   console.log("&&&&&&&&&&&&& Got publish request &&&&&&&&&&&&&&");
-        //                    connection.publish('system_parameters', json, aws_iot_device_sdk_v2_1.mqtt.QoS.AtLeastOnce);
-		// 	   console.log("****** PUBLISHED *******");
-		// 	   publish_request = 0;
-		//         }
-        //             });
-        //             setTimeout(publish, op_idx * 1000);
-		// }
             }
             catch (error) {
                 reject(error);
