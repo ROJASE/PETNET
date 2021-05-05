@@ -55,6 +55,21 @@ function handlePinUpdate(message)
 		console.log("Time to Green");
 		$("#timeToGreen").html(" " + data.timeToGreen);
 	}
+  if(data.pin == 7)
+	{
+		console.log("Steps");
+		$("#stepsReflected").html(" " + data.stepsReflected);
+	}
+  if(data.pin == 8)
+	{
+		console.log("Latitude");
+		$("#latitudeReflected").html(" " + data.latitudeReflected);
+	}
+  if(data.pin == 9)
+	{
+		console.log("Longitude");
+		$("#longitudeReflected").html(" " + data.longitudeReflected);
+	}
 }
 
 // emit (send) a signal to the node.js file to indicate the desire to monitor
@@ -69,9 +84,13 @@ function loadParameters()
 	let roomWidthData = $("#roomWidthDataId").val();
 	let roomLengthData = $("#roomLengthDataId").val();
 	let ceilingHeightData = $("#ceilingHeightDataId").val();
+  let stepsData = $("#stepsDataId").val();
+  let latitudeData = $("#latitudeDataId").val();
+  let longitudeData = $("#longitudeDataId").val();
+
 
 	// send these values to the node.js script in JSON format with a message name of loadValues
-	socket.emit('loadParameters',{roomWidth: roomWidthData, roomLength: roomLengthData, ceilingHeight: ceilingHeightData});
+	socket.emit('loadParameters',{roomWidth: roomWidthData, roomLength: roomLengthData, ceilingHeight: ceilingHeightData, steps: stepsData, latitude: latitudeData, longitude: longitudeData});
 }
 
 function restartAlgorithm()
@@ -216,7 +235,7 @@ body {
     <td><h1 id="roomWidthReflected"></td-->
     <td><h1 id="roomLengthReflected"></td-->
     <td><h1 id="ceilingHeightReflected"></td-->
-    <td rowspan="2"><h1 id="status"></td>
+    <td rowspan="1"><h1 id="status"></td>
   </tr>
 </table>
 </body>
