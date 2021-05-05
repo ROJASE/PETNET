@@ -22,7 +22,7 @@ app.listen(3000);
 io.sockets.on('connection', onConnect);
 
 // declare htmlPage variable to tell the server which web page to serve
-var htmlPage = 'sample_manager.html';
+var htmlPage = 'feeding_manager.html';
 
 // declare variables
 var soc;
