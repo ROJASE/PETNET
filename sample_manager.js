@@ -38,7 +38,7 @@ var pin6 = 6;
 // var roomWidth = 999;
 // var roomLength = 955;
 // var ceilingHeight = 888;
-// var restartAlgorithm = 0;
+var restartAlgorithm = 0;
 // var status = "NoneSt";
 // var roomWidthReflected = "NoneRW";
 // var roomLengthReflected = "NoneRL";
@@ -105,7 +105,7 @@ function onConnect(socket)
     socket.on('loadParameters', handleLoadParameters);
 
     // set up callback for restartAlgorithm message
-    // socket.on('restartAlgorithm', handleRestartAlgorithm);
+     socket.on('restartAlgorithm', handleRestartAlgorithm);
     
     // save the socket identifier in a variable
     soc = socket;
@@ -158,12 +158,12 @@ function handleLoadParameters(data)
     // var min_max_values = data.squareFeet + " " + data.ceilingHeight;
 }
 
-// function handleRestartAlgorithm(data)
-// {
-// 	restartAlgorithm = 1;
-// 	publish_request = 1;
-// 	console.log("Requesting PUBLISH");
-// }
+function handleRestartAlgorithm(data)
+{
+	restartAlgorithm = 1;
+	publish_request = 1;
+	console.log("Requesting PUBLISH");
+}
 
 // this is the callback from the monitor message
 // it allows the webpage to tell the server that it wants a pin monitored and
@@ -350,29 +350,29 @@ function execute_session(connection, argv) {
 		// TODO: this for loop just loops to a high value
 		// clearly, this is not a long-term solution, but 
 		// neither is this ugly webpage
-        //         for (let op_idx = 0; op_idx < 9999; ++op_idx) {
-        //             const publish = () => __awaiter(this, void 0, void 0, function* () {
-        //                 const msg = {
-        //                     // room_width: roomWidth,
-        //                     // room_length: roomLength,
-        //                     // ceiling_height: ceilingHeight,
-		// 	    restart_algorithm: restartAlgorithm,
-        //                     sequence: op_idx + 1,
-        //                 };
+                for (let op_idx = 0; op_idx < 9999; ++op_idx) {
+                    const publish = () => __awaiter(this, void 0, void 0, function* () {
+                        const msg = {
+                            // room_width: roomWidth,
+                            // room_length: roomLength,
+                            // ceiling_height: ceilingHeight,
+			    restart_algorithm: restartAlgorithm,
+                            sequence: op_idx + 1,
+                        };
 			    
-		// 	restartAlgorithm = 0;
-        //                 const json = JSON.stringify(msg);
-		// 	console.log("publish called");
-		//         if(publish_request == 1) 
-		// 	{
-		// 	   console.log("&&&&&&&&&&&&& Got publish request &&&&&&&&&&&&&&");
-        //                    connection.publish('system_parameters', json, aws_iot_device_sdk_v2_1.mqtt.QoS.AtLeastOnce);
-		// 	   console.log("****** PUBLISHED *******");
-		// 	   publish_request = 0;
-		//         }
-        //             });
-        //             setTimeout(publish, op_idx * 1000);
-		// }
+			restartAlgorithm = 0;
+                        const json = JSON.stringify(msg);
+			console.log("publish called");
+		        if(publish_request == 1) 
+			{
+			   console.log("&&&&&&&&&&&&& Got publish request &&&&&&&&&&&&&&");
+                           connection.publish('system_parameters', json, aws_iot_device_sdk_v2_1.mqtt.QoS.AtLeastOnce);
+			   console.log("****** PUBLISHED *******");
+			   publish_request = 0;
+		        }
+                    });
+                    setTimeout(publish, op_idx * 1000);
+		}
             }
             catch (error) {
                 reject(error);

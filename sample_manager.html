@@ -95,20 +95,20 @@ socket.emit('monitor', pin);
 function loadParameters()
 {
 	console.log("loading parameters");
-	// // set minValue and maxValue based on the values entered by the user on the web page
-	// let roomWidthData = $("#roomWidthDataId").val();
-	// let roomLengthData = $("#roomLengthDataId").val();
-	// let ceilingHeightData = $("#ceilingHeightDataId").val();
-  // let stepsData = $("#stepsDataId").val();
-  // let latitudeData = $("#latitudeDataId").val();
-  // let longitudeData = $("#longitudeDataId").val();
-  // let foodWeightData = $("#foodWeightDataID").val();
-  // let timeData = $("#timeDataID").val();
-  // let durationData = $("#durationDataID").val();
+	// set minValue and maxValue based on the values entered by the user on the web page
+	let roomWidthData = $("#roomWidthDataId").val();
+	let roomLengthData = $("#roomLengthDataId").val();
+	let ceilingHeightData = $("#ceilingHeightDataId").val();
+  let stepsData = $("#stepsDataId").val();
+  let latitudeData = $("#latitudeDataId").val();
+  let longitudeData = $("#longitudeDataId").val();
+  let foodWeightData = $("#foodWeightDataID").val();
+  let timeData = $("#timeDataID").val();
+  let durationData = $("#durationDataID").val();
 
 
-	// // send these values to the node.js script in JSON format with a message name of loadValues
-	// socket.emit('loadParameters',{roomWidth: roomWidthData, roomLength: roomLengthData, ceilingHeight: ceilingHeightData, steps: stepsData, latitude: latitudeData, longitude: longitudeData, foodWeight: foodWeightData, time: timeData, duration: durationData});
+	// send these values to the node.js script in JSON format with a message name of loadValues
+	socket.emit('loadParameters',{roomWidth: roomWidthData, roomLength: roomLengthData, ceilingHeight: ceilingHeightData, steps: stepsData, latitude: latitudeData, longitude: longitudeData, foodWeight: foodWeightData, time: timeData, duration: durationData});
 }
 
 function restartAlgorithm()
